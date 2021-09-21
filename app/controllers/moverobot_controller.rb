@@ -9,33 +9,30 @@ class MoverobotController < ApplicationController
     @steps=@steps.split(' ')
      @steps.each do |step|
        @position = Position.last 
-       
-       #if @position.posy < 10  || 
-
-         case step
-           when "N" 
-             @position.posy += 1    
-           when "S"
-             @position.posy -= 1
-           when "E"
-             @position.posx += 1
-           when "W"
-             @position.posx -= 1
-           else
+        case step
+          when "N" 
+            if @position.posy < 10
+              @position.increment!(:posy)
+            end      
+          when "S"
+            if @position.posy > 1
+              @position.decrement!(:posy)
+            end
+          when "E"
+            if @position.posx < 10
+              @position.increment!(:posx)
+            end
+          when "W"
+            if @position.posx > 1
+              @position.decrement!(:posx)
+            end  
+          else
           #  "Error: capacity has an invalid value (#{capacity})"
-         end
-       
-
-         
-      @position1 = Position.new(posx: @position.posx, posy: @position.posy)
-      @position1.save
- 
-    #§end
-
-       
+        end     
+       @position1 = Position.new(posx: @position.posx, posy: @position.posy)
+       @position1.save      
     end
   end
 
-
-
+  
 end
