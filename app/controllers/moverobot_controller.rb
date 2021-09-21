@@ -10,7 +10,7 @@ class MoverobotController < ApplicationController
      @steps.each do |step|
        @position = Position.last 
        
-       #if @position.posy < 10  || 
+       if @position.posy < 10  || 
 
          case step
            when "N" 
@@ -30,7 +30,7 @@ class MoverobotController < ApplicationController
       @position1 = Position.new(posx: @position.posx, posy: @position.posy)
       @position1.save
  
-    #§end
+    end
 
        
     end
